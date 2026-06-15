@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoC Clan Tool</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">⚔️</span>
+      <div>
+        <h1>Clan Recruitment &amp; Management</h1>
+        <span class="version">v{{ version }}</span>
+      </div>
+    </div>
+    <div class="clan-input">
+      <input id="clanTag" type="text" placeholder="Clan tag (e.g. #2PP)" />
+      <button id="loadBtn">Load</button>
+    </div>
+  </header>
+
+  {% if demo_mode %}
+  <div class="banner demo">
+    <strong>Demo mode.</strong> No <code>COC_API_TOKEN</code> is configured, so
+    sample data is shown. Add a token from
+    <a href="https://developer.clashofclans.com/" target="_blank" rel="noopener">developer.clashofclans.com</a>
+    to your <code>.env</code> to load your real clan.
+  </div>
+  {% endif %}
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="members">Members</button>
+    <button class="tab" data-tab="war">War</button>
+    <button class="tab" data-tab="recruit">Recruitment</button>
+  </nav>
+
+  <main>
+    <section id="overview" class="panel active">
+      <div id="overviewCards" class="cards"></div>
+      <div id="overviewMeta" class="meta"></div>
+    </section>
+
+    <section id="members" class="panel">
+      <div class="panel-head">
+        <h2>Roster</h2>
+        <button id="snapshotBtn" class="ghost" title="Save current donations/trophies so the next refresh can show deltas">
+          Save snapshot
+        </button>
+      </div>
+      <p class="hint">Members are ranked by contribution score. Save a snapshot
+        periodically to surface inactivity via donation/trophy deltas.</p>
+      <div id="membersTable"></div>
+    </section>
+
+    <section id="war" class="panel">
+      <h2>Current War</h2>
+      <div id="warSummary"></div>
+      <div id="warTable"></div>
+    </section>
+
+    <section id="recruit" class="panel">
+      <h2>Recruitment Screening</h2>
+      <p class="hint">Enter a prospective player's tag to score them against your
+        clan's requirements.</p>
+      <div class="recruit-input">
+        <input id="recruitTag" type="text" placeholder="Player tag (e.g. #ABC123)" />
+        <button id="screenBtn">Screen</button>
+      </div>
+      <div class="hint demo-tags" id="demoTags"></div>
+      <div id="recruitResult"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span id="status"></span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
