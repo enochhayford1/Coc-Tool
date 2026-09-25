@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falling Behind</title>
+  <meta name="description" content="A blunt dashboard comparing your income, habits and goals against real benchmarks.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">You're <span>falling behind</span></div>
+      <div class="top-actions">
+        <button type="button" id="theme" aria-label="Toggle dark mode">◐ Theme</button>
+      </div>
+    </header>
+
+    <section class="card hero" id="hero" aria-live="polite"></section>
+
+    <details class="card setup" id="setup">
+      <summary>Your numbers</summary>
+      <form id="setup-form" autocomplete="off">
+        <fieldset>
+          <legend>Profile</legend>
+          <div class="fields">
+            <label class="f">Age<input type="number" id="f-age" min="16" max="100" step="1"></label>
+            <label class="f">Annual income, pre-tax (USD)<input type="number" id="f-income" min="0" step="1000"></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Habits</legend>
+          <div class="fields" id="habit-fields"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Goals</legend>
+          <div id="goal-fields"></div>
+          <div class="form-actions">
+            <button type="button" id="add-goal">+ Add goal</button>
+            <button type="button" id="load-sample" class="ghost">Load sample data</button>
+            <button type="button" id="clear-all" class="ghost">Clear everything</button>
+          </div>
+        </fieldset>
+        <p class="note">Everything you type stays in this browser. Nothing is sent anywhere.</p>
+      </form>
+    </details>
+
+    <div class="grid two">
+      <section class="card" aria-labelledby="income-h">
+        <div class="section-head"><h2 id="income-h">Income vs peers</h2></div>
+        <div id="income-body"></div>
+      </section>
+
+      <section class="card" aria-labelledby="habits-h">
+        <div class="section-head"><h2 id="habits-h">Productivity vs average</h2></div>
+        <div id="habits-body"></div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="goals-h" style="margin-top:16px">
+      <div class="section-head"><h2 id="goals-h">Goals vs reality</h2></div>
+      <div id="goals-body"></div>
+    </section>
+
+    <footer>
+      Benchmarks are population averages, not a verdict on you. Sources are listed next to each chart and in <code>js/benchmarks.js</code>.
+    </footer>
+  </div>
+
+  <script src="js/benchmarks.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
